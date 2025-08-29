@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useEarthquakes } from '@/hooks/useEarthquakes';
-import { EarthquakeMap } from '@/components/EarthquakeMap';
+import { EarthquakeMapSimple } from '@/components/EarthquakeMapSimple';
 import { EarthquakeList } from '@/components/EarthquakeList';
 import { EarthquakeFiltersComponent } from '@/components/EarthquakeFilters';
 import { EarthquakeStatsComponent } from '@/components/EarthquakeStats';
@@ -127,23 +127,11 @@ export default function Dashboard() {
               
               <TabsContent value="map" className="mt-4">
                 <div className="h-[700px] w-full">
-                  {!loading && (
-                    <EarthquakeMap
-                      earthquakes={filteredEarthquakes}
-                      selectedEarthquake={selectedEarthquake}
-                      onEarthquakeSelect={setSelectedEarthquake}
-                    />
-                  )}
-                  {loading && (
-                    <Card className="w-full h-full flex items-center justify-center shadow-ios-lg">
-                      <CardContent className="p-8">
-                        <div className="flex items-center justify-center space-x-3">
-                          <RefreshCw className="w-5 h-5 animate-spin text-primary" />
-                          <span className="text-lg font-medium">Harita yükleniyor...</span>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  )}
+                  <EarthquakeMapSimple
+                    earthquakes={filteredEarthquakes}
+                    selectedEarthquake={selectedEarthquake}
+                    onEarthquakeSelect={setSelectedEarthquake}
+                  />
                 </div>
               </TabsContent>
               
