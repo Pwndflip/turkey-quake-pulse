@@ -19,8 +19,11 @@ export default function Dashboard() {
     maxMagnitude: 10,
   });
 
+  // Ensure earthquakes is always an array
+  const safeEarthquakes = Array.isArray(earthquakes) ? earthquakes : [];
+
   const filteredEarthquakes = useMemo(() => {
-    return earthquakes.filter(eq => {
+    return safeEarthquakes.filter(eq => {
       // Magnitude filter
       if (eq.magnitude < filters.minMagnitude || eq.magnitude > filters.maxMagnitude) {
         return false;
@@ -59,7 +62,7 @@ export default function Dashboard() {
       
       return true;
     });
-  }, [earthquakes, filters]);
+  }, [safeEarthquakes, filters]);
 
   const newEarthquakeCount = filteredEarthquakes.filter(eq => eq.isNew).length;
 
@@ -124,11 +127,23 @@ export default function Dashboard() {
               
               <TabsContent value="map" className="mt-4">
                 <div className="h-[700px] w-full">
-                  <EarthquakeMap
-                    earthquakes={filteredEarthquakes}
-                    selectedEarthquake={selectedEarthquake}
-                    onEarthquakeSelect={setSelectedEarthquake}
-                  />
+                  {!loading && (
+                    <EarthquakeMap
+                      earthquakes={filteredEarthquakes}
+                      selectedEarthquake={selectedEarthquake}
+                      onEarthquakeSelect={setSelectedEarthquake}
+                    />
+                  )}
+                  {loading && (
+                    <Card className="w-full h-full flex items-center justify-center shadow-ios-lg">
+                      <CardContent className="p-8">
+                        <div className="flex items-center justify-center space-x-3">
+                          <RefreshCw className="w-5 h-5 animate-spin text-primary" />
+                          <span className="text-lg font-medium">Harita yükleniyor...</span>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
                 </div>
               </TabsContent>
               

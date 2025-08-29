@@ -86,6 +86,9 @@ function EarthquakeMarker({ earthquake, onSelect }: {
 
 export function EarthquakeMap({ earthquakes, selectedEarthquake, onEarthquakeSelect }: EarthquakeMapProps) {
   const mapRef = useRef<any>(null);
+  
+  // Ensure earthquakes is always an array
+  const safeEarthquakes = Array.isArray(earthquakes) ? earthquakes : [];
 
   return (
     <Card className="w-full h-full p-0 overflow-hidden shadow-ios-lg">
@@ -102,9 +105,9 @@ export function EarthquakeMap({ earthquakes, selectedEarthquake, onEarthquakeSel
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         
-        <MapUpdater earthquakes={earthquakes} />
+        <MapUpdater earthquakes={safeEarthquakes} />
         
-        {earthquakes.map((earthquake) => (
+        {safeEarthquakes.length > 0 && safeEarthquakes.map((earthquake) => (
           <EarthquakeMarker
             key={earthquake.id}
             earthquake={earthquake}
