@@ -149,14 +149,36 @@ All colors MUST be HSL.
   /* Leaflet map styles */
   .leaflet-container {
     @apply bg-background;
+    font-family: inherit;
   }
   
   .leaflet-popup-content-wrapper {
     @apply bg-card text-card-foreground rounded-lg shadow-ios;
+    border: 1px solid hsl(var(--border));
   }
   
   .leaflet-popup-tip {
     @apply bg-card;
+    border: 1px solid hsl(var(--border));
+  }
+  
+  .leaflet-popup-content {
+    margin: 8px 12px !important;
+  }
+  
+  .leaflet-control-zoom a {
+    @apply bg-card text-card-foreground border border-border;
+    color: hsl(var(--foreground)) !important;
+  }
+  
+  .leaflet-control-zoom a:hover {
+    @apply bg-muted;
+  }
+  
+  .leaflet-control-attribution {
+    @apply bg-card text-card-foreground border border-border;
+    background-color: hsl(var(--card)) !important;
+    color: hsl(var(--muted-foreground)) !important;
   }
   
   /* iOS-style scrollbars */

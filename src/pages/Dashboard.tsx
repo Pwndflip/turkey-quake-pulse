@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useEarthquakes } from '@/hooks/useEarthquakes';
-import { EarthquakeMapSimple } from '@/components/EarthquakeMapSimple';
+import { EarthquakeMapOSM } from '@/components/EarthquakeMapOSM';
 import { EarthquakeList } from '@/components/EarthquakeList';
 import { EarthquakeFiltersComponent } from '@/components/EarthquakeFilters';
 import { EarthquakeStatsComponent } from '@/components/EarthquakeStats';
@@ -127,7 +127,7 @@ export default function Dashboard() {
               
               <TabsContent value="map" className="mt-4">
                 <div className="h-[700px] w-full">
-                  <EarthquakeMapSimple
+                  <EarthquakeMapOSM
                     earthquakes={filteredEarthquakes}
                     selectedEarthquake={selectedEarthquake}
                     onEarthquakeSelect={setSelectedEarthquake}
