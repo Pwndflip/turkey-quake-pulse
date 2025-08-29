@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, CircleMarker, Popup, useMap } from 'react-leaflet';
+import React, { useEffect, useRef, useMemo } from 'react';
+import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet';
 import { LatLngExpression } from 'leaflet';
 import { Earthquake, getMagnitudeLevel, getMagnitudeColor } from '@/types/earthquake';
 import { format } from 'date-fns';
@@ -15,21 +15,6 @@ interface EarthquakeMapProps {
 
 const turkeyCenter: LatLngExpression = [39.0, 35.0];
 const defaultZoom = 6;
-
-function MapUpdater({ earthquakes }: { earthquakes: Earthquake[] }) {
-  const map = useMap();
-  
-  useEffect(() => {
-    if (earthquakes.length > 0) {
-      const bounds: [number, number][] = earthquakes.map(eq => [eq.latitude, eq.longitude]);
-      if (bounds.length > 1) {
-        map.fitBounds(bounds, { padding: [20, 20] });
-      }
-    }
-  }, [earthquakes, map]);
-  
-  return null;
-}
 
 function EarthquakeMarker({ earthquake, onSelect }: { 
   earthquake: Earthquake; 
@@ -87,34 +72,42 @@ function EarthquakeMarker({ earthquake, onSelect }: {
 export function EarthquakeMap({ earthquakes, selectedEarthquake, onEarthquakeSelect }: EarthquakeMapProps) {
   const mapRef = useRef<any>(null);
   
-  // Ensure earthquakes is always an array
-  const safeEarthquakes = Array.isArray(earthquakes) ? earthquakes : [];
+  // Ensure earthquakes is always an array and memoize it
+  const safeEarthquakes = useMemo(() => {
+    return Array.isArray(earthquakes) ? earthquakes : [];
+  }, [earthquakes]);
+
+  // Memoize markers to prevent unnecessary re-renders
+  const markers = useMemo(() => {
+    return safeEarthquakes.map((earthquake) => (
+      <EarthquakeMarker
+        key={`marker-${earthquake.id}`}
+        earthquake={earthquake}
+        onSelect={onEarthquakeSelect}
+      />
+    ));
+  }, [safeEarthquakes, onEarthquakeSelect]);
 
   return (
     <Card className="w-full h-full p-0 overflow-hidden shadow-ios-lg">
-      <MapContainer
-        ref={mapRef}
-        center={turkeyCenter}
-        zoom={defaultZoom}
-        style={{ height: '100%', width: '100%' }}
-        zoomControl={true}
-        scrollWheelZoom={true}
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        
-        <MapUpdater earthquakes={safeEarthquakes} />
-        
-        {safeEarthquakes.length > 0 && safeEarthquakes.map((earthquake) => (
-          <EarthquakeMarker
-            key={earthquake.id}
-            earthquake={earthquake}
-            onSelect={onEarthquakeSelect}
+      <div style={{ height: '100%', width: '100%' }}>
+        <MapContainer
+          key="earthquake-map"
+          center={turkeyCenter}
+          zoom={defaultZoom}
+          style={{ height: '100%', width: '100%' }}
+          zoomControl={true}
+          scrollWheelZoom={true}
+          ref={mapRef}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-        ))}
-      </MapContainer>
+          
+          {markers}
+        </MapContainer>
+      </div>
     </Card>
   );
 }
