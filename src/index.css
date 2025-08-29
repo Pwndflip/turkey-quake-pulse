@@ -8,60 +8,60 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Base colors - iOS inspired */
-    --background: 248 250 252;  /* iOS light gray background */
-    --foreground: 15 23 42;     /* Dark slate for text */
+    /* Black and white theme */
+    --background: 0 0% 100%;     /* Pure white background */
+    --foreground: 0 0% 0%;       /* Pure black text */
 
-    --card: 255 255 255;        /* Pure white cards */
-    --card-foreground: 15 23 42;
+    --card: 0 0% 100%;           /* Pure white cards */
+    --card-foreground: 0 0% 0%;  /* Black text on cards */
 
-    --popover: 255 255 255;
-    --popover-foreground: 15 23 42;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 0%;
 
-    /* iOS blue primary */
-    --primary: 217 91% 60%;      /* iOS system blue */
-    --primary-foreground: 255 255 255;
-    --primary-glow: 217 91% 70%; /* Lighter blue for effects */
+    /* Black primary */
+    --primary: 0 0% 0%;          /* Pure black primary */
+    --primary-foreground: 0 0% 100%;  /* White text on black */
+    --primary-glow: 0 0% 20%;    /* Dark gray for effects */
 
-    --secondary: 248 250 252;
-    --secondary-foreground: 51 65 85;
+    --secondary: 0 0% 96%;       /* Very light gray */
+    --secondary-foreground: 0 0% 0%;
 
-    --muted: 241 245 249;
-    --muted-foreground: 100 116 139;
+    --muted: 0 0% 96%;           /* Light gray for muted areas */
+    --muted-foreground: 0 0% 45%; /* Medium gray for muted text */
 
-    --accent: 241 245 249;
-    --accent-foreground: 15 23 42;
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 0%;
 
-    /* Alert colors */
+    /* Earthquake colors - keeping for functionality */
     --warning: 45 93% 47%;       /* Amber for medium earthquakes */
-    --warning-foreground: 255 255 255;
+    --warning-foreground: 0 0% 100%;
     
     --destructive: 0 84% 60%;    /* Red for high magnitude */
-    --destructive-foreground: 255 255 255;
+    --destructive-foreground: 0 0% 100%;
     
-    --success: 142 76% 36%;      /* Green for safe/low */
-    --success-foreground: 255 255 255;
+    --success: 120 61% 34%;      /* Green for safe/low */
+    --success-foreground: 0 0% 100%;
 
-    --border: 226 28% 88%;
-    --input: 226 28% 88%;
-    --ring: 217 91% 60%;
+    --border: 0 0% 90%;          /* Light gray borders */
+    --input: 0 0% 90%;           /* Light gray inputs */
+    --ring: 0 0% 0%;             /* Black focus ring */
 
-    --radius: 0.75rem;           /* More rounded for iOS feel */
+    --radius: 0.75rem;
     
-    /* Custom earthquake app tokens */
-    --earthquake-low: 142 76% 36%;     /* Green for magnitude < 3.0 */
+    /* Custom earthquake app tokens - keeping colors for safety */
+    --earthquake-low: 120 61% 34%;     /* Green for magnitude < 3.0 */
     --earthquake-medium: 45 93% 47%;   /* Amber for 3.0-5.0 */
     --earthquake-high: 0 84% 60%;      /* Red for > 5.0 */
     
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-card: linear-gradient(145deg, hsl(255 255 255 / 0.9), hsl(248 250 252 / 0.9));
+    /* Black and white gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(0 0% 0%), hsl(0 0% 20%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(0 0% 98%));
     
-    /* Shadows - iOS style */
-    --shadow-sm: 0 1px 2px 0 hsl(15 23 42 / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(15 23 42 / 0.1), 0 2px 4px -1px hsl(15 23 42 / 0.06);
-    --shadow-lg: 0 10px 15px -3px hsl(15 23 42 / 0.1), 0 4px 6px -2px hsl(15 23 42 / 0.05);
-    --shadow-xl: 0 20px 25px -5px hsl(15 23 42 / 0.1), 0 10px 10px -5px hsl(15 23 42 / 0.04);
+    /* Monochrome shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.06);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.1), 0 4px 6px -2px hsl(0 0% 0% / 0.05);
+    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.1), 0 10px 10px -5px hsl(0 0% 0% / 0.04);
     
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -85,47 +85,47 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 15 23 42;      /* Dark slate background */
-    --foreground: 248 250 252;
+    --background: 0 0% 0%;       /* Pure black background */
+    --foreground: 0 0% 100%;     /* Pure white text */
 
-    --card: 30 41 59;            /* Darker cards */
-    --card-foreground: 248 250 252;
+    --card: 0 0% 4%;             /* Very dark gray cards */
+    --card-foreground: 0 0% 100%;
 
-    --popover: 30 41 59;
-    --popover-foreground: 248 250 252;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 217 91% 60%;      /* Keep iOS blue */
-    --primary-foreground: 255 255 255;
-    --primary-glow: 217 91% 70%;
+    --primary: 0 0% 100%;        /* White primary in dark mode */
+    --primary-foreground: 0 0% 0%;
+    --primary-glow: 0 0% 80%;
 
-    --secondary: 51 65 85;
-    --secondary-foreground: 248 250 252;
+    --secondary: 0 0% 10%;       /* Dark gray secondary */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 51 65 85;
-    --muted-foreground: 148 163 184;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 51 65 85;
-    --accent-foreground: 248 250 252;
+    --accent: 0 0% 10%;
+    --accent-foreground: 0 0% 100%;
 
     --warning: 45 93% 47%;
-    --warning-foreground: 255 255 255;
+    --warning-foreground: 0 0% 0%;
     
     --destructive: 0 84% 60%;
-    --destructive-foreground: 255 255 255;
+    --destructive-foreground: 0 0% 100%;
     
-    --success: 142 76% 36%;
-    --success-foreground: 255 255 255;
+    --success: 120 61% 34%;
+    --success-foreground: 0 0% 100%;
 
-    --border: 51 65 85;
-    --input: 51 65 85;
-    --ring: 217 91% 60%;
-    
-    --earthquake-low: 142 76% 36%;
+    --border: 0 0% 15%;          /* Dark border */
+    --input: 0 0% 15%;
+    --ring: 0 0% 100%;
+
+    --earthquake-low: 120 61% 34%;
     --earthquake-medium: 45 93% 47%;
     --earthquake-high: 0 84% 60%;
     
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-card: linear-gradient(145deg, hsl(30 41 59 / 0.9), hsl(51 65 85 / 0.9));
+    --gradient-primary: linear-gradient(135deg, hsl(0 0% 100%), hsl(0 0% 80%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 4%), hsl(0 0% 8%));
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
